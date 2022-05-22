@@ -4,17 +4,17 @@
 
 
 project: i2c_eeprom
-creation_date: 2022-02-21T12:14:56.326+05:30[Asia/Calcutta]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2022-05-23T23:24:40.757+05:30[Asia/Calcutta]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Windows 10
-mhc_mode: IDE            # [IDE|Standalone|Headless]
-mhc_version: v3.8.0
-mplabx_version: v6.00        # if MPLAB X plugin only
-plugin_version: v3.6.4        # if MPLAB X plugin only
-compiler: XC32 (2.10)
+mhc_mode: Standalone            # [IDE|Standalone|Headless]
+mhc_version: unknown
+mplabx_version: NA        # if MPLAB X plugin only
+plugin_version: NA        # if MPLAB X plugin only
+compiler: xc32
 
 modules:
     - {name: "core", version: "unknown"}
     - {name: "csp", version: "unknown"}
-    - {name: "dev_packs", version: "v3.11.1"}
-    - {name: "bsp", version: "unknown"}
+    - {name: "dev_packs", version: "unknown"}
+    - {name: "bsp", version: "v3.13.0-rc.1"}
 
