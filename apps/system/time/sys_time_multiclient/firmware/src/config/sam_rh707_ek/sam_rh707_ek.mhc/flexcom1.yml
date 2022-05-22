@@ -229,6 +229,13 @@ children:
       children:
       - type: Dynamic
         attributes: {id: flexcom1, value: '59'}
+  - type: Integer
+    attributes: {id: FLEXCOM_TWI_TIMEOUT_COUNT_VAL}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: flexcom1, value: '10000'}
   - type: Boolean
     attributes: {id: FLEXCOM_USART_FIFO_ENABLE}
     children:
@@ -330,6 +337,13 @@ children:
         attributes: {id: visible}
         children:
         - {type: Value, value: 'true'}
+  - type: Boolean
+    attributes: {id: FLEX_USART_MR_MODE9}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: flexcom1, value: 'false'}
   - type: KeyValueSet
     attributes: {id: FLEX_USART_MR_NBSTOP}
     children:
@@ -376,6 +390,13 @@ children:
       children:
       - type: Dynamic
         attributes: {id: flexcom1, value: 'true'}
+  - type: String
+    attributes: {id: USART_DATA_BITS}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: flexcom1, value: DRV_USART_DATA_8_BIT}
 - type: Attachments
   children:
   - type: DirectCapability
