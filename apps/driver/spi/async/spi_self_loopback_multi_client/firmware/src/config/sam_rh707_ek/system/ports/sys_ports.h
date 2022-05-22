@@ -71,7 +71,7 @@
 
   Description:
     Define datatypes needed by Harmony Core SYS_PORT layer.
-    
+
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
