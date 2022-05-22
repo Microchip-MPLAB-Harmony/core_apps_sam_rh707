@@ -6,10 +6,10 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1" displayName="sam_rh707_ek" projectFiles="true">
-          <logicalFolder name="f4" displayName="bsp" projectFiles="true">
+          <logicalFolder name="f1" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/sam_rh707_ek/bsp/bsp.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="driver" projectFiles="true">
+          <logicalFolder name="f2" displayName="driver" projectFiles="true">
             <logicalFolder name="f1" displayName="memory" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/driver/memory/drv_memory.h</itemPath>
               <itemPath>../src/config/sam_rh707_ek/driver/memory/drv_memory_definitions.h</itemPath>
@@ -19,36 +19,36 @@
             <itemPath>../src/config/sam_rh707_ek/driver/driver.h</itemPath>
             <itemPath>../src/config/sam_rh707_ek/driver/driver_common.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="osal" projectFiles="true">
+          <logicalFolder name="f3" displayName="osal" projectFiles="true">
             <itemPath>../src/config/sam_rh707_ek/osal/osal.h</itemPath>
             <itemPath>../src/config/sam_rh707_ek/osal/osal_definitions.h</itemPath>
             <itemPath>../src/config/sam_rh707_ek/osal/osal_impl_basic.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f2" displayName="clk" projectFiles="true">
+          <logicalFolder name="f4" displayName="peripheral" projectFiles="true">
+            <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="hefc" projectFiles="true">
+            <logicalFolder name="f2" displayName="hefc" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/peripheral/hefc/plib_hefc.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="matrix" projectFiles="true">
+            <logicalFolder name="f3" displayName="matrix" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/peripheral/matrix/plib_matrix.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="nvic" projectFiles="true">
+            <logicalFolder name="f4" displayName="nvic" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/peripheral/nvic/plib_nvic.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="pio" projectFiles="true">
+            <logicalFolder name="f5" displayName="pio" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/peripheral/pio/plib_pio.h</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f3" displayName="system" projectFiles="true">
-            <logicalFolder name="f3" displayName="cache" projectFiles="true">
+          <logicalFolder name="f5" displayName="system" projectFiles="true">
+            <logicalFolder name="f1" displayName="cache" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/system/cache/sys_cache.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="debug" projectFiles="true">
+            <logicalFolder name="f2" displayName="debug" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/system/debug/sys_debug.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="fs" projectFiles="true">
+            <logicalFolder name="f3" displayName="fs" projectFiles="true">
               <logicalFolder name="f1" displayName="fat_fs" projectFiles="true">
                 <logicalFolder name="f1" displayName="file_system" projectFiles="true">
                   <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/file_system/ff.h</itemPath>
@@ -64,7 +64,7 @@
               <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs_media_manager_local.h</itemPath>
               <itemPath>../src/config/sam_rh707_ek/system/fs/sys_fs_fat_interface.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f2" displayName="int" projectFiles="true">
+            <logicalFolder name="f4" displayName="int" projectFiles="true">
               <itemPath>../src/config/sam_rh707_ek/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/sam_rh707_ek/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
@@ -187,87 +187,9 @@
       <itemPath>../src/app.h</itemPath>
       <itemPath>../src/nvm_disk_images.h</itemPath>
     </logicalFolder>
-    <logicalFolder name="LinkerScript"
-                   displayName="Linker Files"
-                   projectFiles="true">
-      <logicalFolder name="f1" displayName="config" projectFiles="true">
-        <logicalFolder name="f1" displayName="sam_rh707_ek" projectFiles="true">
-          <itemPath>../src/config/sam_rh707_ek/ATSAMRH707F18A.ld</itemPath>
-        </logicalFolder>
-      </logicalFolder>
-    </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
-      <logicalFolder name="f1" displayName="config" projectFiles="true">
-        <logicalFolder name="f1" displayName="sam_rh707_ek" projectFiles="true">
-          <logicalFolder name="f5" displayName="bsp" projectFiles="true">
-            <itemPath>../src/config/sam_rh707_ek/bsp/bsp.c</itemPath>
-          </logicalFolder>
-          <logicalFolder name="f1" displayName="driver" projectFiles="true">
-            <logicalFolder name="f1" displayName="memory" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory_hefc.c</itemPath>
-              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory.c</itemPath>
-              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory_file_system.c</itemPath>
-            </logicalFolder>
-          </logicalFolder>
-          <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f2" displayName="clk" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/peripheral/clk/plib_clk.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f1" displayName="hefc" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/peripheral/hefc/plib_hefc.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f4" displayName="matrix" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/peripheral/matrix/plib_matrix.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f5" displayName="nvic" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/peripheral/nvic/plib_nvic.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f3" displayName="pio" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/peripheral/pio/plib_pio.c</itemPath>
-            </logicalFolder>
-          </logicalFolder>
-          <logicalFolder name="f4" displayName="stdio" projectFiles="true">
-            <itemPath>../src/config/sam_rh707_ek/stdio/xc32_monitor.c</itemPath>
-          </logicalFolder>
-          <logicalFolder name="f3" displayName="system" projectFiles="true">
-            <logicalFolder name="f3" displayName="cache" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/system/cache/sys_cache.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f1" displayName="fs" projectFiles="true">
-              <logicalFolder name="f1" displayName="fat_fs" projectFiles="true">
-                <logicalFolder name="f1" displayName="file_system" projectFiles="true">
-                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/file_system/ff.c</itemPath>
-                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/file_system/ffunicode.c</itemPath>
-                </logicalFolder>
-                <logicalFolder name="f2" displayName="hardware_access" projectFiles="true">
-                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/hardware_access/diskio.c</itemPath>
-                </logicalFolder>
-              </logicalFolder>
-              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs.c</itemPath>
-              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs_media_manager.c</itemPath>
-              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs_fat_interface.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f2" displayName="int" projectFiles="true">
-              <itemPath>../src/config/sam_rh707_ek/system/int/src/sys_int.c</itemPath>
-            </logicalFolder>
-          </logicalFolder>
-          <itemPath>../src/config/sam_rh707_ek/initialization.c</itemPath>
-          <itemPath>../src/config/sam_rh707_ek/interrupts.c</itemPath>
-          <itemPath>../src/config/sam_rh707_ek/exceptions.c</itemPath>
-          <itemPath>../src/config/sam_rh707_ek/startup_xc32.c</itemPath>
-          <itemPath>../src/config/sam_rh707_ek/libc_syscalls.c</itemPath>
-          <itemPath>../src/config/sam_rh707_ek/tasks.c</itemPath>
-        </logicalFolder>
-      </logicalFolder>
-      <itemPath>../src/main.c</itemPath>
-      <itemPath>../src/app.c</itemPath>
-      <itemPath>../src/nvm_disk_images.c</itemPath>
-    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
-                   projectFiles="false">
+                   projectFiles="true">
       <logicalFolder name="f1" displayName="sam_rh707_ek.mhc" projectFiles="true">
         <itemPath>../src/config/sam_rh707_ek/sam_rh707_ek.mhc/BSP_SAM_RH707_Evaluation_Kit.yml</itemPath>
         <itemPath>../src/config/sam_rh707_ek/sam_rh707_ek.mhc/cmsis.yml</itemPath>
@@ -283,6 +205,86 @@
       </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/sam_rh707_ek/harmony-manifest-success.yml</itemPath>
+      <itemPath>../src/config/sam_rh707_ek/pin_configurations.csv</itemPath>
+      <itemPath>fs_nvm_fat_sam_rh707_ek.mc3</itemPath>
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
+      <logicalFolder name="f1" displayName="config" projectFiles="true">
+        <logicalFolder name="f1" displayName="sam_rh707_ek" projectFiles="true">
+          <itemPath>../src/config/sam_rh707_ek/ATSAMRH707F18A.ld</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="f1" displayName="config" projectFiles="true">
+        <logicalFolder name="f1" displayName="sam_rh707_ek" projectFiles="true">
+          <logicalFolder name="f1" displayName="bsp" projectFiles="true">
+            <itemPath>../src/config/sam_rh707_ek/bsp/bsp.c</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f2" displayName="driver" projectFiles="true">
+            <logicalFolder name="f1" displayName="memory" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory_hefc.c</itemPath>
+              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory.c</itemPath>
+              <itemPath>../src/config/sam_rh707_ek/driver/memory/src/drv_memory_file_system.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="f3" displayName="peripheral" projectFiles="true">
+            <logicalFolder name="f1" displayName="clk" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/peripheral/clk/plib_clk.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f2" displayName="hefc" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/peripheral/hefc/plib_hefc.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f3" displayName="matrix" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/peripheral/matrix/plib_matrix.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f4" displayName="nvic" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/peripheral/nvic/plib_nvic.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f5" displayName="pio" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/peripheral/pio/plib_pio.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+          <logicalFolder name="f4" displayName="stdio" projectFiles="true">
+            <itemPath>../src/config/sam_rh707_ek/stdio/xc32_monitor.c</itemPath>
+          </logicalFolder>
+          <logicalFolder name="f5" displayName="system" projectFiles="true">
+            <logicalFolder name="f1" displayName="cache" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/system/cache/sys_cache.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f2" displayName="fs" projectFiles="true">
+              <logicalFolder name="f1" displayName="fat_fs" projectFiles="true">
+                <logicalFolder name="f1" displayName="file_system" projectFiles="true">
+                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/file_system/ff.c</itemPath>
+                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/file_system/ffunicode.c</itemPath>
+                </logicalFolder>
+                <logicalFolder name="f2" displayName="hardware_access" projectFiles="true">
+                  <itemPath>../src/config/sam_rh707_ek/system/fs/fat_fs/hardware_access/diskio.c</itemPath>
+                </logicalFolder>
+              </logicalFolder>
+              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs.c</itemPath>
+              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs_media_manager.c</itemPath>
+              <itemPath>../src/config/sam_rh707_ek/system/fs/src/sys_fs_fat_interface.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f3" displayName="int" projectFiles="true">
+              <itemPath>../src/config/sam_rh707_ek/system/int/src/sys_int.c</itemPath>
+            </logicalFolder>
+          </logicalFolder>
+          <itemPath>../src/config/sam_rh707_ek/initialization.c</itemPath>
+          <itemPath>../src/config/sam_rh707_ek/interrupts.c</itemPath>
+          <itemPath>../src/config/sam_rh707_ek/exceptions.c</itemPath>
+          <itemPath>../src/config/sam_rh707_ek/startup_xc32.c</itemPath>
+          <itemPath>../src/config/sam_rh707_ek/libc_syscalls.c</itemPath>
+          <itemPath>../src/config/sam_rh707_ek/tasks.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <itemPath>../src/main.c</itemPath>
+      <itemPath>../src/app.c</itemPath>
+      <itemPath>../src/nvm_disk_images.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -359,6 +361,7 @@
       <C32>
         <property key="additional-warnings" value="true"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="enable-app-io" value="false"/>
         <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-symbols" value="true"/>
@@ -415,6 +418,7 @@
         <property key="additional-options-use-response-files" value="false"/>
         <property key="additional-options-write-sla" value="false"/>
         <property key="allocate-dinit" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="code-dinit" value="false"/>
         <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
@@ -454,6 +458,7 @@
       <C32CPP>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>
@@ -482,6 +487,7 @@
         <property key="use-indirect-calls" value="false"/>
       </C32CPP>
       <C32Global>
+        <property key="appendMe" value=""/>
         <property key="common-include-directories" value=""/>
         <property key="gp-relative-option" value=""/>
         <property key="legacy-libc" value="false"/>
