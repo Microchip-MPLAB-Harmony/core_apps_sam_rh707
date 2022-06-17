@@ -1,0 +1,77 @@
+{
+	"metaDataVersion": "1.0.0",
+	"category": "com.microchip.ide.project",
+	"content": {
+		"metaDataVersion": "1.1.0",
+		"name": "com.microchip.mcu32.mplabx.project.core_apps_sam_rh707_system_time_sys_time_multiclient_sam_rh707_ek",
+		"version": "3.2.0",
+		"displayName": "Time System Service multi-client Example for SAM RH707 Family",
+		"projectName": "sys_time_multiclient_sam_rh707_ek",
+		"shortDescription": "This example application demonstrates the multi-client system timer functionality",
+		"ide": {
+			"name": "MPLABX",
+			"semverRange": ">=6.0.0"
+		},
+		"compiler": [
+			{
+				"name": "XC32",
+				"semverRange": ">=4.1.0"
+			}
+		],
+		"dfp": {
+			"name": "SAMRH707_DFP",
+			"semverRange": "^1.0.28"
+		},
+		"configurator": {
+			"name": "MHC",
+			"semverRange": ">=3.8.0"
+		},
+		"device": {
+			"metaDataVersion": "1.0.0",
+			"category": "com.microchip.portal.contentRef",
+			"content": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.device",
+				"name": "ATSAMRH707F18A",
+				"versionRange": "*"
+			}
+		},
+		"author": "Microchip",
+		"subcategories": [
+			[
+				"Development Kit",
+				"SAM RH707 Evaluation Kit"
+			],
+			[
+				"Harmony",
+				"System Services",
+				"TIME"
+			]
+		],
+		"peripherals": [
+			"TIME"
+		],
+		"keywords": [
+			"MHC",
+			"Harmony",
+			"ATSAMRH707F18A",
+			"SAM RH707 Family",
+			"TC",
+			"TCC",
+			"TMR",
+			"Timer",
+			"Counter"
+		],
+		"additionalData": {
+			"longDescription": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.portal.fileRef",
+				"content": {
+					"metaDataVersion": "1.0.0",
+					"fileName": "./../../readme.md",
+					"mimeType": "text/markdown"
+				}
+			}
+		}
+	}
+}
