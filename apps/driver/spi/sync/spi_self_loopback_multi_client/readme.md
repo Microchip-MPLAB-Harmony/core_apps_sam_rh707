@@ -40,7 +40,7 @@ To build the application, refer to the following table and open the project usin
 
 | Project Name      | Description                                    |
 | ----------------- | ---------------------------------------------- |
-| sam_rh707_ek_freertos.X | MPLABX project for SAM RH707 Evaluation Kit |
+| sam_rh707_ek_freertos.X | MPLABX project for [SAM RH707 Evaluation Kit](https://www.microchip.com/en-us/development-tool/SAMRH707F18-EK) |
 |||
 
 ## Setting up the hardware
@@ -49,10 +49,10 @@ The following table shows the target hardware for the application projects.
 
 | Project Name| Board|
 |:---------|:---------:|
-| sam_rh707_ek_freertos.X | SAM RH707 Evaluation Kit |
+| sam_rh707_ek_freertos.X | [SAM RH707 Evaluation Kit](https://www.microchip.com/en-us/development-tool/SAMRH707F18-EK) |
 |||
 
-### Setting up SAM RH707 Evaluation Kit
+### Setting up [SAM RH707 Evaluation Kit](https://www.microchip.com/en-us/development-tool/SAMRH707F18-EK)
 
 - Use jumper wire to Connect "Pin 16 of J18 header" to "Pin 17 of J18 header" 
     - FLEXCOM3_IO0 signal as MOSI signal and it is mapped to PB22 that is routed to "Pin 16 of J18 header" 
@@ -69,5 +69,5 @@ Refer to the following table for LED name:
 
 | Board | LED Name |
 | ----- | -------- |
-|  SAM RH707 Evaluation Kit | LED0 |
+|  [SAM RH707 Evaluation Kit](https://www.microchip.com/en-us/development-tool/SAMRH707F18-EK) | LED0 |
 |||
