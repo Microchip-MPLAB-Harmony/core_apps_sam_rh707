@@ -48,13 +48,23 @@
 #include "plib_flexcom3_spi_master.h"
 #include "interrupts.h"
 
+#define FLEXCOM_SPI_TDR_8BIT_REG      (*(volatile uint8_t* const)((FLEXCOM3_BASE_ADDRESS + FLEX_SPI_TDR_REG_OFST)))
+
+#define FLEXCOM_SPI_TDR_9BIT_REG      (*(volatile uint16_t* const)((FLEXCOM3_BASE_ADDRESS + FLEX_SPI_TDR_REG_OFST)))
+
+
+
+#define FLEXCOM_SPI_RDR_8BIT_REG      (*(volatile uint8_t* const)((FLEXCOM3_BASE_ADDRESS + FLEX_SPI_RDR_REG_OFST)))
+
+#define FLEXCOM_SPI_RDR_9BIT_REG      (*(volatile uint16_t* const)((FLEXCOM3_BASE_ADDRESS + FLEX_SPI_RDR_REG_OFST)))
 // *****************************************************************************
 // *****************************************************************************
 // Section: FLEXCOM3 SPI Implementation
 // *****************************************************************************
 // *****************************************************************************
 /* Global object to save FLEXCOM SPI Exchange related data */
-FLEXCOM_SPI_OBJECT flexcom3SpiObj;
+volatile static FLEXCOM_SPI_OBJECT flexcom3SpiObj;
+
 
 void FLEXCOM3_SPI_Initialize ( void )
 {
@@ -66,10 +76,10 @@ void FLEXCOM3_SPI_Initialize ( void )
 
 
     /* Enable Master mode, select clock source, select particular NPCS line for chip select and disable mode fault detection */
-    FLEXCOM3_REGS->FLEX_SPI_MR = FLEX_SPI_MR_MSTR_Msk | FLEX_SPI_MR_BRSRCCLK_PERIPH_CLK | FLEX_SPI_MR_DLYBCS(0) | FLEX_SPI_MR_PCS(FLEXCOM_SPI_CHIP_SELECT_NPCS0) | FLEX_SPI_MR_MODFDIS_Msk;
+    FLEXCOM3_REGS->FLEX_SPI_MR = FLEX_SPI_MR_MSTR_Msk | FLEX_SPI_MR_BRSRCCLK_PERIPH_CLK | FLEX_SPI_MR_DLYBCS(0U) | FLEX_SPI_MR_PCS((uint32_t)FLEXCOM_SPI_CHIP_SELECT_NPCS0) | FLEX_SPI_MR_MODFDIS_Msk;
 
     /* Set up clock Polarity, data phase, Communication Width, Baud Rate */
-    FLEXCOM3_REGS->FLEX_SPI_CSR[0]= FLEX_SPI_CSR_CPOL(0) | FLEX_SPI_CSR_NCPHA(1) | FLEX_SPI_CSR_BITS_8_BIT | FLEX_SPI_CSR_SCBR(50) | FLEX_SPI_CSR_DLYBS(0) | FLEX_SPI_CSR_DLYBCT(0) | FLEX_SPI_CSR_CSAAT_Msk;
+    FLEXCOM3_REGS->FLEX_SPI_CSR[0]= FLEX_SPI_CSR_CPOL(0U) | FLEX_SPI_CSR_NCPHA(1U) | FLEX_SPI_CSR_BITS_8_BIT | FLEX_SPI_CSR_SCBR(50U) | FLEX_SPI_CSR_DLYBS(0U) | FLEX_SPI_CSR_DLYBCT(0U)  | FLEX_SPI_CSR_CSAAT_Msk ;
 
 
 
@@ -89,86 +99,102 @@ bool FLEXCOM3_SPI_WriteRead (void* pTransmitData, size_t txSize, void* pReceiveD
 {
     bool isRequestAccepted = false;
     uint32_t dummyData;
+    size_t txSz;
 
-    /* Verify the request */
-    if((((txSize > 0) && (pTransmitData != NULL)) || ((rxSize > 0) && (pReceiveData != NULL))) && (flexcom3SpiObj.transferIsBusy == false))
+    if (flexcom3SpiObj.transferIsBusy == false)
     {
-        isRequestAccepted = true;
-        flexcom3SpiObj.txBuffer = pTransmitData;
-        flexcom3SpiObj.rxBuffer = pReceiveData;
-        flexcom3SpiObj.rxCount = 0;
-        flexcom3SpiObj.txCount = 0;
-        flexcom3SpiObj.dummySize = 0;
-        if (pTransmitData != NULL)
+        /* Verify the request */
+        if(((txSize > 0U) && (pTransmitData != NULL)) || ((rxSize > 0U) && (pReceiveData != NULL)))
         {
-            flexcom3SpiObj.txSize = txSize;
-        }
-        else
-        {
-            flexcom3SpiObj.txSize = 0;
-        }
-
-        if (pReceiveData != NULL)
-        {
-            flexcom3SpiObj.rxSize = rxSize;
-        }
-        else
-        {
-            flexcom3SpiObj.rxSize = 0;
-        }
-
-        flexcom3SpiObj.transferIsBusy = true;
-
-        /* Flush out any unread data in SPI read buffer */
-        dummyData = (FLEXCOM3_REGS->FLEX_SPI_RDR & FLEX_SPI_RDR_RD_Msk) >> FLEX_SPI_RDR_RD_Pos;
-        (void)dummyData;
-
-        if (flexcom3SpiObj.rxSize > flexcom3SpiObj.txSize)
-        {
-            flexcom3SpiObj.dummySize = flexcom3SpiObj.rxSize - flexcom3SpiObj.txSize;
-        }
-
-        /* Start the first write here itself, rest will happen in ISR context */
-        if((FLEXCOM3_REGS->FLEX_SPI_CSR[0] & FLEX_SPI_CSR_BITS_Msk) == FLEX_SPI_CSR_BITS_8_BIT)
-        {
-            if (flexcom3SpiObj.txCount < flexcom3SpiObj.txSize)
+            isRequestAccepted = true;
+            flexcom3SpiObj.txBuffer = pTransmitData;
+            flexcom3SpiObj.rxBuffer = pReceiveData;
+            flexcom3SpiObj.rxCount = 0;
+            flexcom3SpiObj.txCount = 0;
+            flexcom3SpiObj.dummySize = 0;
+            if (pTransmitData != NULL)
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = *((uint8_t*)flexcom3SpiObj.txBuffer);
-                flexcom3SpiObj.txCount++;
+                flexcom3SpiObj.txSize = txSize;
             }
-            else if (flexcom3SpiObj.dummySize > 0)
+            else
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = (uint8_t)(0xff);
-                flexcom3SpiObj.dummySize--;
+                flexcom3SpiObj.txSize = 0;
             }
-        }
-        else
-        {
-            flexcom3SpiObj.txSize >>= 1;
-            flexcom3SpiObj.dummySize >>= 1;
-            flexcom3SpiObj.rxSize >>= 1;
 
-            if (flexcom3SpiObj.txCount < flexcom3SpiObj.txSize)
+            if (pReceiveData != NULL)
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = *((uint16_t*)flexcom3SpiObj.txBuffer);
-                flexcom3SpiObj.txCount++;
+                flexcom3SpiObj.rxSize = rxSize;
             }
-            else if (flexcom3SpiObj.dummySize > 0)
+            else
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = (uint16_t)(0xffff);
-                flexcom3SpiObj.dummySize--;
+                flexcom3SpiObj.rxSize = 0;
             }
-        }
 
-        if (rxSize > 0)
-        {
-            /* Enable receive interrupt to complete the transfer in ISR context */
-            FLEXCOM3_REGS->FLEX_SPI_IER = FLEX_SPI_IER_RDRF_Msk;
-        }
-        else
-        {
-            /* Enable transmit interrupt to complete the transfer in ISR context */
-            FLEXCOM3_REGS->FLEX_SPI_IER = FLEX_SPI_IER_TDRE_Msk;
+            flexcom3SpiObj.transferIsBusy = true;
+
+            /* Flush out any unread data in SPI read buffer */
+            dummyData = (FLEXCOM3_REGS->FLEX_SPI_RDR & FLEX_SPI_RDR_RD_Msk) >> FLEX_SPI_RDR_RD_Pos;
+            (void)dummyData;
+
+            txSz = flexcom3SpiObj.txSize;
+
+            if (flexcom3SpiObj.rxSize > txSz)
+            {
+                flexcom3SpiObj.dummySize = flexcom3SpiObj.rxSize - txSz;
+            }
+
+            /* Start the first write here itself, rest will happen in ISR context */
+            if((FLEXCOM3_REGS->FLEX_SPI_CSR[0] & FLEX_SPI_CSR_BITS_Msk) == FLEX_SPI_CSR_BITS_8_BIT)
+            {
+                if (flexcom3SpiObj.txCount < txSz)
+                {
+                    FLEXCOM3_REGS->FLEX_SPI_TDR = *((uint8_t*)flexcom3SpiObj.txBuffer);
+                    flexcom3SpiObj.txCount++;
+                }
+                else if (flexcom3SpiObj.dummySize > 0U)
+                {
+                    FLEXCOM3_REGS->FLEX_SPI_TDR = (uint8_t)(0xff);
+                    flexcom3SpiObj.dummySize--;
+                }
+                else
+                {
+                    /* Do nothing */
+                }
+            }
+            else
+            {
+                flexcom3SpiObj.txSize >>= 1;
+                flexcom3SpiObj.dummySize >>= 1;
+                flexcom3SpiObj.rxSize >>= 1;
+
+                txSz = flexcom3SpiObj.txSize;
+
+                if (flexcom3SpiObj.txCount < txSz)
+                {
+                    FLEXCOM3_REGS->FLEX_SPI_TDR = *((uint16_t*)flexcom3SpiObj.txBuffer);
+                    flexcom3SpiObj.txCount++;
+                }
+                else if (flexcom3SpiObj.dummySize > 0U)
+                {
+                    FLEXCOM3_REGS->FLEX_SPI_TDR = (uint16_t)(0xffff);
+                    flexcom3SpiObj.dummySize--;
+                }
+                else
+                {
+                    /* Do nothing */
+                }
+            }
+
+            if (rxSize > 0U)
+            {
+                /* Enable receive interrupt to complete the transfer in ISR context */
+                FLEXCOM3_REGS->FLEX_SPI_IER = FLEX_SPI_IER_RDRF_Msk;
+            }
+            else
+            {
+                /* Enable transmit interrupt to complete the transfer in ISR context */
+                FLEXCOM3_REGS->FLEX_SPI_IER = FLEX_SPI_IER_TDRE_Msk;
+            }
         }
     }
 
@@ -178,30 +204,35 @@ bool FLEXCOM3_SPI_WriteRead (void* pTransmitData, size_t txSize, void* pReceiveD
 bool FLEXCOM3_SPI_TransferSetup (FLEXCOM_SPI_TRANSFER_SETUP * setup, uint32_t spiSourceClock )
 {
     uint32_t scbr;
-    if ((setup == NULL) || (setup->clockFrequency == 0))
+    bool setupStatus = false;
+    if ((setup != NULL) && (setup->clockFrequency != 0U))
     {
-        return false;
-    }
-    if(spiSourceClock == 0)
-    {
-        // Fetch Master Clock Frequency directly
-        spiSourceClock = 50000000;
-    }
+        if(spiSourceClock == 0U)
+        {
+            // Fetch Master Clock Frequency directly
+            spiSourceClock = 50000000;
+        }
 
-    scbr = spiSourceClock/setup->clockFrequency;
+        scbr = spiSourceClock/setup->clockFrequency;
 
-    if(scbr == 0)
-    {
-        scbr = 1;
+        if(scbr == 0U)
+        {
+            scbr = 1;
+        }
+        else if(scbr > 255U)
+        {
+            scbr = 255;
+        }
+        else
+        {
+            /* Do nothing */
+        }
+
+        FLEXCOM3_REGS->FLEX_SPI_CSR[0]= (FLEXCOM3_REGS->FLEX_SPI_CSR[0] & ~(FLEX_SPI_CSR_CPOL_Msk | FLEX_SPI_CSR_NCPHA_Msk | FLEX_SPI_CSR_BITS_Msk | FLEX_SPI_CSR_SCBR_Msk)) | ((uint32_t)setup->clockPolarity | (uint32_t)setup->clockPhase | (uint32_t)setup->dataBits | FLEX_SPI_CSR_SCBR(scbr));
+
+        setupStatus = true;
     }
-    else if(scbr > 255)
-    {
-        scbr = 255;
-    }
-
-    FLEXCOM3_REGS->FLEX_SPI_CSR[0]= (FLEXCOM3_REGS->FLEX_SPI_CSR[0] & ~(FLEX_SPI_CSR_CPOL_Msk | FLEX_SPI_CSR_NCPHA_Msk | FLEX_SPI_CSR_BITS_Msk | FLEX_SPI_CSR_SCBR_Msk)) | ((uint32_t)setup->clockPolarity | (uint32_t)setup->clockPhase | (uint32_t)setup->dataBits | FLEX_SPI_CSR_SCBR(scbr));
-
-    return true;
+    return setupStatus;
 }
 
 bool FLEXCOM3_SPI_Write(void* pTransmitData, size_t txSize)
@@ -216,7 +247,7 @@ bool FLEXCOM3_SPI_Read(void* pReceiveData, size_t rxSize)
 
 bool FLEXCOM3_SPI_IsTransmitterBusy(void)
 {
-    return ((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_TXEMPTY_Msk) == 0)? true : false;
+    return ((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_TXEMPTY_Msk) == 0U);
 }
 
 void FLEXCOM3_SPI_CallbackRegister (FLEXCOM_SPI_CALLBACK callback, uintptr_t context)
@@ -227,34 +258,42 @@ void FLEXCOM3_SPI_CallbackRegister (FLEXCOM_SPI_CALLBACK callback, uintptr_t con
 
 bool FLEXCOM3_SPI_IsBusy(void)
 {
-    return ((flexcom3SpiObj.transferIsBusy) || ((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_TXEMPTY_Msk) == 0));
+    bool transferIsBusy = flexcom3SpiObj.transferIsBusy;
+
+    return (((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_TXEMPTY_Msk) == 0U) || (transferIsBusy));
 }
 
-void FLEXCOM3_InterruptHandler(void)
+void __attribute__((used)) FLEXCOM3_InterruptHandler(void)
 {
     uint32_t dataBits ;
     uint32_t receivedData;
     dataBits = FLEXCOM3_REGS->FLEX_SPI_CSR[0] & FLEX_SPI_CSR_BITS_Msk;
 
     static bool isLastByteTransferInProgress = false;
+    uintptr_t context = flexcom3SpiObj.context;
 
     /* save the status in global object before it gets cleared */
     flexcom3SpiObj.status = FLEXCOM3_REGS->FLEX_SPI_SR;
+
+
+    size_t rxCount = flexcom3SpiObj.rxCount;
+    size_t txCount = flexcom3SpiObj.txCount;
 
     if ((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_RDRF_Msk ) == FLEX_SPI_SR_RDRF_Msk)
     {
         receivedData = (FLEXCOM3_REGS->FLEX_SPI_RDR & FLEX_SPI_RDR_RD_Msk) >> FLEX_SPI_RDR_RD_Pos;
 
-        if (flexcom3SpiObj.rxCount < flexcom3SpiObj.rxSize)
+        if (rxCount < flexcom3SpiObj.rxSize)
         {
             if(dataBits == FLEX_SPI_CSR_BITS_8_BIT)
             {
-                ((uint8_t*)flexcom3SpiObj.rxBuffer)[flexcom3SpiObj.rxCount++] = receivedData;
+                ((uint8_t*)flexcom3SpiObj.rxBuffer)[rxCount] = (uint8_t)receivedData;
             }
             else
             {
-                ((uint16_t*)flexcom3SpiObj.rxBuffer)[flexcom3SpiObj.rxCount++] = receivedData;
+                ((uint16_t*)flexcom3SpiObj.rxBuffer)[rxCount] = (uint16_t)receivedData;
             }
+            rxCount++;
         }
     }
 
@@ -267,29 +306,41 @@ void FLEXCOM3_InterruptHandler(void)
 
         if(dataBits == FLEX_SPI_CSR_BITS_8_BIT)
         {
-            if (flexcom3SpiObj.txCount < flexcom3SpiObj.txSize)
+            if (txCount < flexcom3SpiObj.txSize)
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = ((uint8_t*)flexcom3SpiObj.txBuffer)[flexcom3SpiObj.txCount++];
+                FLEXCOM3_REGS->FLEX_SPI_TDR = ((uint8_t*)flexcom3SpiObj.txBuffer)[txCount];
+                txCount++;
             }
-            else if (flexcom3SpiObj.dummySize > 0)
+            else if (flexcom3SpiObj.dummySize > 0U)
             {
                 FLEXCOM3_REGS->FLEX_SPI_TDR = (uint8_t)(0xff);
                 flexcom3SpiObj.dummySize--;
             }
+            else
+            {
+                /* Do nothing */
+            }
         }
         else
         {
-            if (flexcom3SpiObj.txCount < flexcom3SpiObj.txSize)
+            if (txCount < flexcom3SpiObj.txSize)
             {
-                FLEXCOM3_REGS->FLEX_SPI_TDR = ((uint16_t*)flexcom3SpiObj.txBuffer)[flexcom3SpiObj.txCount++];
+                FLEXCOM3_REGS->FLEX_SPI_TDR = ((uint16_t*)flexcom3SpiObj.txBuffer)[txCount];
+                txCount++;
             }
-            else if (flexcom3SpiObj.dummySize > 0)
+            else if (flexcom3SpiObj.dummySize > 0U)
             {
                 FLEXCOM3_REGS->FLEX_SPI_TDR = (uint16_t)(0xffff);
                 flexcom3SpiObj.dummySize--;
             }
+            else
+            {
+                /* Do nothing */
+            }
         }
-        if ((flexcom3SpiObj.txCount == flexcom3SpiObj.txSize) && (flexcom3SpiObj.dummySize == 0))
+        size_t dummySize = flexcom3SpiObj.dummySize;
+
+        if ((txCount == flexcom3SpiObj.txSize) && (dummySize == 0U))
         {
             /* At higher baud rates, the data in the shift register can be
              * shifted out and TXEMPTY flag can get set resulting in a
@@ -307,7 +358,7 @@ void FLEXCOM3_InterruptHandler(void)
 
             isLastByteTransferInProgress = true;
         }
-        else if (flexcom3SpiObj.rxCount == flexcom3SpiObj.rxSize)
+        else if (rxCount == flexcom3SpiObj.rxSize)
         {
             /* Enable TDRE interrupt as all the requested bytes are received
              * and can now make use of the internal transmit shift register.
@@ -315,12 +366,19 @@ void FLEXCOM3_InterruptHandler(void)
             FLEXCOM3_REGS->FLEX_SPI_IDR = FLEX_SPI_IDR_RDRF_Msk;
             FLEXCOM3_REGS->FLEX_SPI_IER = FLEX_SPI_IDR_TDRE_Msk;
         }
+        else
+        {
+            /* Do nothing */
+        }
     }
+
+    flexcom3SpiObj.rxCount = rxCount;
+    flexcom3SpiObj.txCount = txCount;
 
     /* See if Exchange is complete */
     if ((isLastByteTransferInProgress == true) && ((FLEXCOM3_REGS->FLEX_SPI_SR & FLEX_SPI_SR_TXEMPTY_Msk) == FLEX_SPI_SR_TXEMPTY_Msk))
     {
-        if (flexcom3SpiObj.rxCount == flexcom3SpiObj.rxSize)
+        if (rxCount == flexcom3SpiObj.rxSize)
         {
             /* Set Last transfer to deassert NPCS after the last byte written in TDR has been transferred. */
             FLEXCOM3_REGS->FLEX_SPI_CR = FLEX_SPI_CR_LASTXFER_Msk;
@@ -334,7 +392,7 @@ void FLEXCOM3_InterruptHandler(void)
 
             if(flexcom3SpiObj.callback != NULL)
             {
-                flexcom3SpiObj.callback(flexcom3SpiObj.context);
+                flexcom3SpiObj.callback(context);
             }
         }
     }

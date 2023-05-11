@@ -1,17 +1,20 @@
-/*******************************************************************************
-  Matrix (AHB) PLIB
+/******************************************************************************
+  SD Card (SPI) Driver File System Interface Implementation
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_matrix.c
+    drv_sdspi_file_system.h
 
   Summary:
-    AHB Matrix PLIB implementation file
+    SD Card (SPI) Driver Interface Definition
 
   Description:
-    Configure AHB masters and slaves.
+    The SD Card Driver provides a interface to access the SD Card. This file
+    implements the SD Card Driver file system interface.
+    This file should be included in the project if SD Card driver functionality
+    with File system is needed.
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
@@ -36,43 +39,42 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*******************************************************************************/
+ *******************************************************************************/
 // DOM-IGNORE-END
+#ifndef DRV_SDSPI_FILE_SYSTEM_H
+#define DRV_SDSPI_FILE_SYSTEM_H
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Include Files
+// *****************************************************************************
+// *****************************************************************************
+
+#include "driver/sdspi/drv_sdspi.h"
+#include "system/fs/sys_fs_media_manager.h"
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
+// DOM-IGNORE-END
+// *****************************************************************************
+// *****************************************************************************
+// Section: Global objects
+// *****************************************************************************
+// *****************************************************************************
 
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Included Files
+// Section: MEMORY Driver File system interface Routines
 // *****************************************************************************
 // *****************************************************************************
-#include <device.h>
-#include "plib_matrix.h"
 
-// *****************************************************************************
+void DRV_SDSPI_RegisterWithSysFs( const SYS_MODULE_INDEX drvIndex);
 
-void MATRIX_Initialize(void)
-{
-    /* Set FlexRAM memory in user mode */
-    MATRIX0_REGS->MATRIX_PASSR[0]= 0xFF;
-    MATRIX0_REGS->MATRIX_PSR[0]= 0x00030303;
-    MATRIX0_REGS->MATRIX_PASSR[1]= 0xFF;
-    MATRIX0_REGS->MATRIX_PSR[1]= 0x00030303;
-    MATRIX0_REGS->MATRIX_PASSR[7]= 0xFF;
-    MATRIX0_REGS->MATRIX_PSR[7]= 0x00030303;
-
-    /* Set AHB Slave in user mode */
-    MATRIX0_REGS->MATRIX_PSR[6] = 0x00070707;
-    MATRIX0_REGS->MATRIX_PASSR[6] = 0x00000444;
-
-    /* Set HEFC TOP value and set memory in user mode */
-    MATRIX0_REGS->MATRIX_PASSR[2] = 0x5;
-    MATRIX0_REGS->MATRIX_PSR[2] = 0x00010101;
-    MATRIX0_REGS->MATRIX_PRTSR[2] = 0x5;
-
-    /* Enable Master Remap Control for SPW, IP1553, ICM and CRCCU to access address 0 */
-    MATRIX0_REGS->MATRIX_MRCR |= (1UL << 9U) | (1UL << 10U) | (1UL << 11U) | (1UL << 12U);
+#ifdef __cplusplus
 }
+#endif
 
-/*******************************************************************************
- End of File
-*/
+#endif //#ifndef DRV_SDSPI_FILE_SYSTEM_H
