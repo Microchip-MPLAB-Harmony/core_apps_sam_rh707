@@ -48,11 +48,11 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include "configuration.h"
 #include "device_vectors.h"
 #include "interrupts.h"
 #include "definitions.h"
+
 
 
 // *****************************************************************************
@@ -68,7 +68,7 @@ extern const H3DeviceVectors exception_table;
 extern void Dummy_Handler(void);
 
 /* Brief default interrupt handler for unused IRQs.*/
-void __attribute__((optimize("-O1"),section(".text.Dummy_Handler"),long_call, noreturn))Dummy_Handler(void)
+void __attribute__((optimize("-O1"), long_call, noreturn, used))Dummy_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
     __builtin_software_breakpoint();
@@ -79,10 +79,8 @@ void __attribute__((optimize("-O1"),section(".text.Dummy_Handler"),long_call, no
 }
 
 /* MISRAC 2012 deviation block start */
-/* MISRA C-2012 Rule 8.6 deviated 58 times.  Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
+/* MISRA C-2012 Rule 8.6 deviated 56 times.  Deviation record ID -  H3_MISRAC_2012_R_8_6_DR_1 */
 /* Device vectors list dummy definition*/
-extern void vPortSVCHandler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
-extern void xPortPendSVHandler         ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void SUPC_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void RSTC_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void RTC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -131,7 +129,7 @@ extern void HEFC_INTNOFIX_Handler      ( void ) __attribute__((weak, alias("Dumm
 extern void TC2_CH0_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void TC2_CH1_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void TC2_CH2_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
-extern void HEMC_INTSDRAMC_Handler     ( void ) __attribute__((weak, alias("Dummy_Handler")));
+extern void HEMC_INTHEMC_Handler       ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void HEMC_INTFIX_Handler        ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void HEMC_INTNOFIX_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void SFR_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -147,7 +145,7 @@ extern void IP1553_Handler             ( void ) __attribute__((weak, alias("Dumm
 
 
 
-__attribute__ ((section(".vectors")))
+__attribute__ ((section(".vectors"), used))
 const H3DeviceVectors exception_table=
 {
     /* Configure Initial Stack Pointer, using linker-generated symbols */
@@ -212,7 +210,7 @@ const H3DeviceVectors exception_table=
     .pfnTC2_CH0_Handler            = TC2_CH0_Handler,
     .pfnTC2_CH1_Handler            = TC2_CH1_Handler,
     .pfnTC2_CH2_Handler            = TC2_CH2_Handler,
-    .pfnHEMC_INTSDRAMC_Handler     = HEMC_INTSDRAMC_Handler,
+    .pfnHEMC_INTHEMC_Handler       = HEMC_INTHEMC_Handler,
     .pfnHEMC_INTFIX_Handler        = HEMC_INTFIX_Handler,
     .pfnHEMC_INTNOFIX_Handler      = HEMC_INTNOFIX_Handler,
     .pfnSFR_Handler                = SFR_Handler,
