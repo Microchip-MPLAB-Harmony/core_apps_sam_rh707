@@ -64,6 +64,7 @@
           <itemPath>../src/config/sam_rh707_ek_freertos/FreeRTOSConfig.h</itemPath>
           <itemPath>../src/config/sam_rh707_ek_freertos/user.h</itemPath>
           <itemPath>../src/config/sam_rh707_ek_freertos/configuration.h</itemPath>
+          <itemPath>../src/config/sam_rh707_ek_freertos/sys_tasks.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f2" displayName="FreeRTOS" projectFiles="true">
@@ -201,19 +202,6 @@
       <itemPath>../src/app_usart_echo.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles" displayName="Important Files" projectFiles="true">
-      <logicalFolder name="f1" displayName="sam_rh707_ek_freertos.mhc" projectFiles="true">
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/BSP_SAM_RH707_Evaluation_Kit.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/cmsis.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/core.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/drv_usart.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/flexcom1.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/FreeRTOS.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/GraphSettings.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/HarmonyCore.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/project.yml</itemPath>
-        <itemPath>../src/config/sam_rh707_ek_freertos/sam_rh707_ek_freertos.mhc/settings.yml</itemPath>
-      </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/sam_rh707_ek_freertos/harmony-manifest-success.yml</itemPath>
       <itemPath>../src/config/sam_rh707_ek_freertos/pin_configurations.csv</itemPath>
