@@ -63,13 +63,13 @@
 #include "peripheral/tc/plib_tc0.h"
 #include "bsp/bsp.h"
 #include "driver/sdspi/drv_sdspi.h"
-#include "system/time/sys_time.h"
 #include "system/int/sys_int.h"
 #include "system/ports/sys_ports.h"
 #include "system/cache/sys_cache.h"
 #include "system/dma/sys_dma.h"
 #include "osal/osal.h"
 #include "system/debug/sys_debug.h"
+#include "system/time/sys_time.h"
 #include "app.h"
 
 
@@ -83,13 +83,13 @@ extern "C" {
 // DOM-IGNORE-END
 
 /* Device Information */
-#define DEVICE_NAME			 "ATSAMRH707F18A"
-#define DEVICE_ARCH			 "CORTEX-M7"
-#define DEVICE_FAMILY		 "SAMRH"
-#define DEVICE_SERIES		 "SAMRH707"
+#define DEVICE_NAME          "ATSAMRH707F18A"
+#define DEVICE_ARCH          "CORTEX-M7"
+#define DEVICE_FAMILY        "SAMRH"
+#define DEVICE_SERIES        "SAMRH707"
 
 /* CPU clock frequency */
-#define CPU_CLOCK_FREQUENCY 50000000
+#define CPU_CLOCK_FREQUENCY 50000000U
 
 // *****************************************************************************
 // *****************************************************************************

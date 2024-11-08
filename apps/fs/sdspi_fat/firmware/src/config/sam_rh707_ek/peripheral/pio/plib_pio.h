@@ -91,21 +91,21 @@
 
 
 /*** Macros for GPIO_PB18 pin ***/
-#define GPIO_PB18_Set()               (PIOB_REGS->PIO_SODR = (1<<18))
-#define GPIO_PB18_Clear()             (PIOB_REGS->PIO_CODR = (1<<18))
+#define GPIO_PB18_Set()               (PIOB_REGS->PIO_SODR = ((uint32_t)1U<<18U))
+#define GPIO_PB18_Clear()             (PIOB_REGS->PIO_CODR = ((uint32_t)1U<<18U))
 #define GPIO_PB18_Toggle()            do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_ODSR ^= (1<<18);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_ODSR ^= ((uint32_t)1U<<18U);\
                                         } while (0)
 #define GPIO_PB18_OutputEnable()      do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_CFGR |=(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_CFGR |=((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         }while(0)
 #define GPIO_PB18_InputEnable()       do { \
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_CFGR &= ~(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_CFGR &= ~((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         } while (0)
-#define GPIO_PB18_Get()               ((PIOB_REGS->PIO_PDSR >> 18) & 0x1)
+#define GPIO_PB18_Get()               ((PIOB_REGS->PIO_PDSR >> 18U) & 0x1U)
 #define GPIO_PB18_PIN                  PIO_PIN_PB18
 // *****************************************************************************
 /* PIO Ports
