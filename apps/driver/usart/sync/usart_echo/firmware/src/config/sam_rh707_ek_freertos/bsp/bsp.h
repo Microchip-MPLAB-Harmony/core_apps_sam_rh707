@@ -74,48 +74,48 @@
 
 /*** LED Macros for LED0 ***/
 #define LED0_Toggle() do { PIOB_REGS->PIO_MSKR = (1UL<<11); (PIOB_REGS->PIO_ODSR ^= (1UL<<11)); } while (0)
-#define LED0_Get() ((PIOB_REGS->PIO_PDSR >> 11) & 0x1)
+#define LED0_Get() ((PIOB_REGS->PIO_PDSR >> 11) & 0x1U)
 #define LED0_On() (PIOB_REGS->PIO_SODR = (1UL<<11))
 #define LED0_Off() (PIOB_REGS->PIO_CODR = (1UL<<11))
 /*** LED Macros for LED1 ***/
 #define LED1_Toggle() do { PIOB_REGS->PIO_MSKR = (1UL<<12); (PIOB_REGS->PIO_ODSR ^= (1UL<<12)); } while (0)
-#define LED1_Get() ((PIOB_REGS->PIO_PDSR >> 12) & 0x1)
+#define LED1_Get() ((PIOB_REGS->PIO_PDSR >> 12) & 0x1U)
 #define LED1_On() (PIOB_REGS->PIO_SODR = (1UL<<12))
 #define LED1_Off() (PIOB_REGS->PIO_CODR = (1UL<<12))
 /*** LED Macros for LED2 ***/
 #define LED2_Toggle() do { PIOB_REGS->PIO_MSKR = (1UL<<13); (PIOB_REGS->PIO_ODSR ^= (1UL<<13)); } while (0)
-#define LED2_Get() ((PIOB_REGS->PIO_PDSR >> 13) & 0x1)
+#define LED2_Get() ((PIOB_REGS->PIO_PDSR >> 13) & 0x1U)
 #define LED2_On() (PIOB_REGS->PIO_SODR = (1UL<<13))
 #define LED2_Off() (PIOB_REGS->PIO_CODR = (1UL<<13))
 /*** LED Macros for LED3 ***/
 #define LED3_Toggle() do { PIOB_REGS->PIO_MSKR = (1UL<<14); (PIOB_REGS->PIO_ODSR ^= (1UL<<14)); } while (0)
-#define LED3_Get() ((PIOB_REGS->PIO_PDSR >> 14) & 0x1)
+#define LED3_Get() ((PIOB_REGS->PIO_PDSR >> 14) & 0x1U)
 #define LED3_On() (PIOB_REGS->PIO_SODR = (1UL<<14))
 #define LED3_Off() (PIOB_REGS->PIO_CODR = (1UL<<14))
 /*** LED Macros for LED4 ***/
 #define LED4_Toggle() do { PIOA_REGS->PIO_MSKR = (1UL<<17); (PIOA_REGS->PIO_ODSR ^= (1UL<<17)); } while (0)
-#define LED4_Get() ((PIOA_REGS->PIO_PDSR >> 17) & 0x1)
+#define LED4_Get() ((PIOA_REGS->PIO_PDSR >> 17) & 0x1U)
 #define LED4_On() (PIOA_REGS->PIO_SODR = (1UL<<17))
 #define LED4_Off() (PIOA_REGS->PIO_CODR = (1UL<<17))
 /*** LED Macros for LED5 ***/
 #define LED5_Toggle() do { PIOA_REGS->PIO_MSKR = (1UL<<18); (PIOA_REGS->PIO_ODSR ^= (1UL<<18)); } while (0)
-#define LED5_Get() ((PIOA_REGS->PIO_PDSR >> 18) & 0x1)
+#define LED5_Get() ((PIOA_REGS->PIO_PDSR >> 18) & 0x1U)
 #define LED5_On() (PIOA_REGS->PIO_SODR = (1UL<<18))
 #define LED5_Off() (PIOA_REGS->PIO_CODR = (1UL<<18))
 /*** SWITCH Macros for PB0 ***/
-#define PB0_Get() ((PIOA_REGS->PIO_PDSR >> 31) & 0x1)
+#define PB0_Get() ((PIOA_REGS->PIO_PDSR >> 31) & 0x1U)
 #define PB0_STATE_PRESSED 0
 #define PB0_STATE_RELEASED 1
 /*** SWITCH Macros for PB1 ***/
-#define PB1_Get() ((PIOB_REGS->PIO_PDSR >> 0) & 0x1)
+#define PB1_Get() ((PIOB_REGS->PIO_PDSR >> 0) & 0x1U)
 #define PB1_STATE_PRESSED 0
 #define PB1_STATE_RELEASED 1
 /*** SWITCH Macros for PB2 ***/
-#define PB2_Get() ((PIOB_REGS->PIO_PDSR >> 1) & 0x1)
+#define PB2_Get() ((PIOB_REGS->PIO_PDSR >> 1) & 0x1U)
 #define PB2_STATE_PRESSED 0
 #define PB2_STATE_RELEASED 1
 /*** SWITCH Macros for PB3 ***/
-#define PB3_Get() ((PIOB_REGS->PIO_PDSR >> 2) & 0x1)
+#define PB3_Get() ((PIOB_REGS->PIO_PDSR >> 2) & 0x1U)
 #define PB3_STATE_PRESSED 0
 #define PB3_STATE_RELEASED 1
 
