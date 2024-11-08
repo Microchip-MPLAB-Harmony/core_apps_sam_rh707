@@ -91,39 +91,39 @@
 
 
 /*** Macros for CLIENT1_CS pin ***/
-#define CLIENT1_CS_Set()               (PIOB_REGS->PIO_SODR = (1<<18))
-#define CLIENT1_CS_Clear()             (PIOB_REGS->PIO_CODR = (1<<18))
+#define CLIENT1_CS_Set()               (PIOB_REGS->PIO_SODR = ((uint32_t)1U<<18U))
+#define CLIENT1_CS_Clear()             (PIOB_REGS->PIO_CODR = ((uint32_t)1U<<18U))
 #define CLIENT1_CS_Toggle()            do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_ODSR ^= (1<<18);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_ODSR ^= ((uint32_t)1U<<18U);\
                                         } while (0)
 #define CLIENT1_CS_OutputEnable()      do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_CFGR |=(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_CFGR |=((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         }while(0)
 #define CLIENT1_CS_InputEnable()       do { \
-                                            PIOB_REGS->PIO_MSKR = (1<<18); \
-                                            PIOB_REGS->PIO_CFGR &= ~(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<18U); \
+                                            PIOB_REGS->PIO_CFGR &= ~((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         } while (0)
-#define CLIENT1_CS_Get()               ((PIOB_REGS->PIO_PDSR >> 18) & 0x1)
+#define CLIENT1_CS_Get()               ((PIOB_REGS->PIO_PDSR >> 18U) & 0x1U)
 #define CLIENT1_CS_PIN                  PIO_PIN_PB18
 
 /*** Macros for CLIENT2_CS pin ***/
-#define CLIENT2_CS_Set()               (PIOB_REGS->PIO_SODR = (1<<20))
-#define CLIENT2_CS_Clear()             (PIOB_REGS->PIO_CODR = (1<<20))
+#define CLIENT2_CS_Set()               (PIOB_REGS->PIO_SODR = ((uint32_t)1U<<20U))
+#define CLIENT2_CS_Clear()             (PIOB_REGS->PIO_CODR = ((uint32_t)1U<<20U))
 #define CLIENT2_CS_Toggle()            do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<20); \
-                                            PIOB_REGS->PIO_ODSR ^= (1<<20);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<20U); \
+                                            PIOB_REGS->PIO_ODSR ^= ((uint32_t)1U<<20U);\
                                         } while (0)
 #define CLIENT2_CS_OutputEnable()      do {\
-                                            PIOB_REGS->PIO_MSKR = (1<<20); \
-                                            PIOB_REGS->PIO_CFGR |=(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<20U); \
+                                            PIOB_REGS->PIO_CFGR |=((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         }while(0)
 #define CLIENT2_CS_InputEnable()       do { \
-                                            PIOB_REGS->PIO_MSKR = (1<<20); \
-                                            PIOB_REGS->PIO_CFGR &= ~(1 << PIO_CFGR_DIR_Pos);\
+                                            PIOB_REGS->PIO_MSKR = ((uint32_t)1U<<20U); \
+                                            PIOB_REGS->PIO_CFGR &= ~((uint32_t)1U << PIO_CFGR_DIR_Pos);\
                                         } while (0)
-#define CLIENT2_CS_Get()               ((PIOB_REGS->PIO_PDSR >> 20) & 0x1)
+#define CLIENT2_CS_Get()               ((PIOB_REGS->PIO_PDSR >> 20U) & 0x1U)
 #define CLIENT2_CS_PIN                  PIO_PIN_PB20
 // *****************************************************************************
 /* PIO Ports
