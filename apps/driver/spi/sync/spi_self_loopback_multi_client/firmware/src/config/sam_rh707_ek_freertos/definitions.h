@@ -54,9 +54,9 @@
 #include "peripheral/nvic/plib_nvic.h"
 #include "peripheral/xdmac/plib_xdmac.h"
 #include "peripheral/flexcom/spi/master/plib_flexcom3_spi_master.h"
-#include "bsp/bsp.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "bsp/bsp.h"
 #include "driver/spi/drv_spi.h"
 #include "system/int/sys_int.h"
 #include "system/ports/sys_ports.h"
@@ -79,13 +79,13 @@ extern "C" {
 // DOM-IGNORE-END
 
 /* Device Information */
-#define DEVICE_NAME			 "ATSAMRH707F18A"
-#define DEVICE_ARCH			 "CORTEX-M7"
-#define DEVICE_FAMILY		 "SAMRH"
-#define DEVICE_SERIES		 "SAMRH707"
+#define DEVICE_NAME          "ATSAMRH707F18A"
+#define DEVICE_ARCH          "CORTEX-M7"
+#define DEVICE_FAMILY        "SAMRH"
+#define DEVICE_SERIES        "SAMRH707"
 
 /* CPU clock frequency */
-#define CPU_CLOCK_FREQUENCY 50000000
+#define CPU_CLOCK_FREQUENCY 50000000U
 
 // *****************************************************************************
 // *****************************************************************************
