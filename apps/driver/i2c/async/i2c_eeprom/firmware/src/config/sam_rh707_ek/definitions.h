@@ -14,7 +14,7 @@
 
 //DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -54,11 +54,11 @@
 #include "peripheral/nvic/plib_nvic.h"
 #include "bsp/bsp.h"
 #include "driver/i2c/drv_i2c.h"
-#include "peripheral/flexcom/twi/master/plib_flexcom2_twi_master.h"
 #include "system/int/sys_int.h"
 #include "system/cache/sys_cache.h"
 #include "osal/osal.h"
 #include "system/debug/sys_debug.h"
+#include "peripheral/flexcom/twi/master/plib_flexcom2_twi_master.h"
 #include "app.h"
 
 
